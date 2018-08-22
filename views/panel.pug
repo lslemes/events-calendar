@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	div.header
+		span #{session.user.username}
+		a(href='/signout')
+			button(type='button') SIGN OUT
+	div.calendar
+		span todo

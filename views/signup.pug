@@ -2,7 +2,7 @@ extends layout
 
 block content
 	div.container
-		form(method='POST' action='/signin')
+		form(method='POST', action='/users')
 			label(for='username') Username: 
 			input(type='text', name='username', id='username')
 			br
@@ -11,6 +11,5 @@ block content
 			input(type='text', name='password', id='password')
 			br
 
-			button(type='submit') SIGN IN
-			a(href='/signup')
-				button(type='button') SIGN UP
+			button(type='submit') SIGN UP
+			button(type='reset') RESET
