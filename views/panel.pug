@@ -6,4 +6,27 @@ block content
 		a(href='/signout')
 			button(type='button') SIGN OUT
 	div.calendar
-		span todo
+		div.month
+			ul
+				li.prev &#10094;
+				li.next &#10095;
+				li August
+				br
+				span 2017
+
+		ul.weekdays
+			li Su
+			li Mo
+			li Tu
+			li We
+			li Th
+			li Fr
+			li Sa
+
+		ul.days
+			- for (var i = 0; i < obj.weekDayFirstDay; i++) {
+				li
+			- }
+			- for (var i = 1; i <= obj.numberOfDays; i++) {
+				li= i
+			- }
