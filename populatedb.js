@@ -24,22 +24,8 @@ mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection 
 var users = [];
 var events = [];
 
-function eventCreate(description, begin, end, cb) {
-	var event = new Event({ description: description, begin: begin, end: end });
-
-	event.save(function (err) {
-		if (err) {
-			cb(err, null);
-			return;
-		}
-		console.log('New Event: ' + event);
-		events.push(event);
-		cb(null, event);
-	}  );
-}
-
-function userCreate(username, password, event, cb) {
-	var user = new User({ username: username, password: password, event: event });
+function userCreate(username, password, cb) {
+	var user = new User({ username: username, password: password });
 
 	user.save(function (err) {
 		if (err) {
@@ -52,34 +38,48 @@ function userCreate(username, password, event, cb) {
 	}  );
 }
 
-function createEvents(cb) {
-	async.parallel([
-		function(callback) {
-			eventCreate('Wedding', '2018-08-26T14:00:00Z', '2018-08-26T20:00:00Z', callback);
-		},
-		function(callback) {
-			eventCreate('Birthday', '2018-08-27T16:00:00Z', '2018-08-27T20:00:00Z', callback);
-		},
-		function(callback) {
-			eventCreate('Seminar', '2018-08-30T14:00:00Z', '2018-08-30T15:00:00Z', callback);
+function eventCreate(description, begin, end, user, cb) {
+	var event = new Event({ description: description, begin: begin, end: end, user: user });
+
+	event.save(function (err) {
+		if (err) {
+			cb(err, null);
+			return;
 		}
-	], cb);
+		console.log('New Event: ' + event);
+		events.push(event);
+		cb(null, event);
+	}  );
 }
 
 function createUsers(cb) {
 	async.parallel([
 		function(callback) {
-			userCreate('leo', '123', [events[0], events[1]], callback);
+			userCreate('leo', '123', callback);
 		},
 		function(callback) {
-			userCreate('dan', '123', [events[2]], callback);
+			userCreate('dan', '123', callback);
 		},
 	], cb);
 }
 
+function createEvents(cb) {
+	async.parallel([
+		function(callback) {
+			eventCreate('Wedding', '2018-08-26T14:00:00Z', '2018-08-26T20:00:00Z', users[0], callback);
+		},
+		function(callback) {
+			eventCreate('Birthday', '2018-08-27T16:00:00Z', '2018-08-27T20:00:00Z', users[0], callback);
+		},
+		function(callback) {
+			eventCreate('Seminar', '2018-08-30T14:00:00Z', '2018-08-30T15:00:00Z', users[1], callback);
+		}
+	], cb);
+}
+
 async.series([
-	createEvents,
-	createUsers
+	createUsers,
+	createEvents
 ],
 function(err, results) {
 	if (err) {

@@ -6,6 +6,7 @@ var EventSchema = new Schema({
 	description: {type: String},
 	begin: {type: Date},
 	end: {type: Date},
+	user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 EventSchema
