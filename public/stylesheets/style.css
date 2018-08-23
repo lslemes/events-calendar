@@ -82,6 +82,11 @@ div.calendar {
 	padding-top: 25px;
 }
 
+span.date {
+	color: black;
+	font-size: 36px;
+}
+
 table {
 	border-collapse: collapse;
 	width: 80%;
