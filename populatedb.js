@@ -72,7 +72,7 @@ function createEvents(cb) {
 			eventCreate('Birthday', '2018-08-27T16:00:00', '2018-08-27T20:00:00', users[0], callback);
 		},
 		function(callback) {
-			eventCreate('Long Event', '2018-08-22T16:00:00', '2018-09-29T20:00:00', users[0], callback);
+			eventCreate('Long Event', '2018-08-28T16:00:00', '2018-09-29T20:00:00', users[0], callback);
 		},
 		function(callback) {
 			eventCreate('Seminar', '2018-08-30T14:00:00', '2018-08-30T15:00:00', users[1], callback);
