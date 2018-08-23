@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	div.header
+	div.userheader
 		span #{session.user.username}
 		- var prevyyyy, prevmm, nextyyyy, nextmm;
 		- if (Number(obj.mm) === 0) {

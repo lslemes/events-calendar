@@ -14,7 +14,7 @@ function del() {
 
 function edi() {
 	var id = $(this).attr('data-id');
-	var obj = {"_id":id, "description":$("#description").val(), "begin":$("#begindate").val()+'T'+$("#begintime").val()+':00Z', "end":$("#enddate").val()+'T'+$("#endtime").val()+':00Z'};
+	var obj = {"_id":id, "description":$("#description").val(), "begin":$("#begindate").val()+'T'+$("#begintime").val()+':00Z', "end":$("#enddate").val()+'T'+$("#endtime").val()+':00'};
 
 	jQuery.ajax({
 		url: '/events/' + id,

@@ -12,8 +12,8 @@ router.post('/', function(req, res, next) {
 	var newEvent = new Event();
 
 	newEvent.description = req.body.description;
-	newEvent.begin = req.body.begindate + 'T' + req.body.begintime + ':00Z';
-	newEvent.end = req.body.enddate + 'T' + req.body.endtime + ':00Z';
+	newEvent.begin = req.body.begindate + 'T' + req.body.begintime + ':00';
+	newEvent.end = req.body.enddate + 'T' + req.body.endtime + ':00';
 	newEvent.user = req.session.user._id;
 
 	newEvent.save(function(err, savedEvent) {

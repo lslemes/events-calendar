@@ -66,16 +66,16 @@ function createUsers(cb) {
 function createEvents(cb) {
 	async.parallel([
 		function(callback) {
-			eventCreate('Wedding', '2018-08-26T14:00:00Z', '2018-08-26T20:00:00Z', users[0], callback);
+			eventCreate('Wedding', '2018-08-26T14:00:00', '2018-08-26T20:00:00', users[0], callback);
 		},
 		function(callback) {
-			eventCreate('Birthday', '2018-08-27T16:00:00Z', '2018-08-27T20:00:00Z', users[0], callback);
+			eventCreate('Birthday', '2018-08-27T16:00:00', '2018-08-27T20:00:00', users[0], callback);
 		},
 		function(callback) {
-			eventCreate('Long Event', '2018-08-22T16:00:00Z', '2018-09-29T20:00:00Z', users[0], callback);
+			eventCreate('Long Event', '2018-08-22T16:00:00', '2018-09-29T20:00:00', users[0], callback);
 		},
 		function(callback) {
-			eventCreate('Seminar', '2018-08-30T14:00:00Z', '2018-08-30T15:00:00Z', users[1], callback);
+			eventCreate('Seminar', '2018-08-30T14:00:00', '2018-08-30T15:00:00', users[1], callback);
 		}
 	], cb);
 }

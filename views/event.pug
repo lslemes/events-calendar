@@ -1,16 +1,19 @@
 extends layout
 
 block content
-	div.container
-		table
+	div.calendar
+		table.event
 			tr
-				td Description
+				td
+					b Description
 				td #{event.description}
 			tr
-				td Begin
+				td
+					b Begin
 				td #{event.begin}
 			tr
-				td End
+				td
+					b End
 				td #{event.end}
 
 		a(href=event.url + '/edit')
@@ -18,4 +21,4 @@ block content
 		button#del(type='button' data-id=event._id) DELETE
 		a(href='/')
 			button#back(type='button') BACK
-	script(src='/javascripts/main.js')
+		script(src='/javascripts/main.js')
