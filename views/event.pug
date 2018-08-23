@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	div.container
+		table
+			tr
+				td Description
+				td #{event.description}
+			tr
+				td Begin
+				td #{event.begin}
+			tr
+				td End
+				td #{event.end}
+
+		a(href=event.url + '/edit')
+			button(type='button') EDIT
+		button#del(type='button' data-id=event._id) DELETE
+		a(href='/')
+			button#back(type='button') BACK
+	script(src='/javascripts/main.js')

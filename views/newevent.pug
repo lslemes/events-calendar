@@ -1,0 +1,27 @@
+extends layout
+
+block content
+	div.container
+		form(method='POST', action='/events')
+			label(for='description') Description: 
+			input(type='text', name='description', id='description')
+			br
+
+			label(for='begindate') Begin date: 
+			input(type='date', name='begindate', id='begindate')
+			br
+
+			label(for='begintime') Begin time: 
+			input(type='time', name='begintime', id='begintime')
+			br
+
+			label(for='enddate') End date: 
+			input(type='date', name='enddate', id='enddate')
+			br
+
+			label(for='endtime') End time: 
+			input(type='time', name='endtime', id='endtime')
+			br
+
+			button(type='submit') ADD
+			button(type='reset') RESET

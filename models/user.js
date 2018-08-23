@@ -10,7 +10,8 @@ var UserSchema = new Schema({
 UserSchema
 .virtual('url')
 .get(function() {
-	return '/users/' + this._id;
+	var today = new Date();
+	return '/users/' + this._id + '/' + today.getFullYear() + '/' + today.getMonth();
 });
 
 module.exports = mongoose.model('User', UserSchema);

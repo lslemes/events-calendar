@@ -5,9 +5,12 @@ var User = require('../models/user');
 
 router.get('/', function(req, res, next) {
 	if (req.session.user) {
-		res.redirect('/users/' + req.session.user._id);
+		var today = new Date();
+		res.redirect('/users/' + req.session.user._id + '/' + today.getFullYear() + '/' + today.getMonth());
 	}
-	res.render('index');
+	else {
+		res.render('index');	
+	}
 });
 
 router.post('/signin', function(req, res, next) {

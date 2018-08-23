@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	div.container
+		label(for='description') Description: 
+		input(type='text', name='description', id='description', value=event.description)
+		br
+
+		label(for='begindate') Begin date: 
+		input(type='date', name='begindate', id='begindate', value=event.begin.toISOString().substr(0, 10))
+		br
+
+		label(for='begintime') Begin time: 
+		input(type='time', name='begintime', id='begintime', value=event.begin.toISOString().substr(11, 5))
+		br
+
+		label(for='enddate') End date: 
+		input(type='date', name='enddate', id='enddate', value=event.end.toISOString().substr(0, 10))
+		br
+
+		label(for='endtime') End time: 
+		input(type='time', name='endtime', id='endtime', value=event.end.toISOString().substr(11, 5))
+		br
+
+		button#edi(type='button' data-id=event._id) UPDATE
+		a(href='/')
+			button#back(type='button') BACK
+	script(src='/javascripts/main.js')

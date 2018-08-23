@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var User = require('../models/user');
+var Event = require('../models/event');
 
 router.get('/create', function(req, res, next) {
 	res.render('signup');
@@ -18,26 +19,21 @@ router.post('/', function(req, res, next) {
 	});
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id/:yyyy/:mm', function(req, res, next) {
 	if (req.session.user && req.session.user._id === req.params.id) {
-		var today = new Date();
-		var mm = today.getMonth();
-		var yyyy = today.getFullYear();
-		var firstDay = new Date(yyyy, mm, 1);
-		var lastDay = new Date(yyyy, mm + 1, 0);
+		var firstDay = new Date(req.params.yyyy, req.params.mm, 1);
+		var lastDay = new Date(req.params.yyyy, Number(req.params.mm) + 1, 0);
 		const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-		var obj = { month: monthNames[today.getMonth()], year: yyyy, weekDayFirstDay: firstDay.getDay(), numberOfDays: lastDay.getDate() };
+		var obj = { month: monthNames[req.params.mm], mm: req.params.mm, yyyy: req.params.yyyy, weekDayFirstDay: firstDay.getDay(), numberOfDays: lastDay.getDate() };
 
-		console.log();
-		console.log();
-		console.log();
-		console.log();
-		console.log();
-		console.log(obj);
-		res.render('panel', {obj: obj});
+		Event.find({ user: req.session.user._id }, function(err, events) {
+			res.render('panel', {obj: obj, evt: events});
+		});
 	}
-	res.redirect('/');
+	else {
+		res.redirect('/');	
+	}
 });
 
 module.exports = router;

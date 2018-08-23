@@ -3,30 +3,77 @@ extends layout
 block content
 	div.header
 		span #{session.user.username}
+		- var prevyyyy, prevmm, nextyyyy, nextmm;
+		- if (Number(obj.mm) === 0) {
+			- prevyyyy = Number(obj.yyyy) - 1;
+			- prevmm = 11;
+		- }
+		- else {
+			- prevyyyy = Number(obj.yyyy);
+			- prevmm = Number(obj.mm) - 1;
+		- }
+		- if (Number(obj.mm) === 11) {
+			- nextyyyy = Number(obj.yyyy) + 1;
+			- nextmm = 0;
+		- }
+		- else {
+			- nextyyyy = Number(obj.yyyy);
+			- nextmm = Number(obj.mm) + 1;
+		- }
+		a(href='/events/create')
+			button(type='button') NEW EVENT
+		a(href='/users/' + session.user._id + '/' + prevyyyy + '/' + prevmm)
+			button(type='button') PREV
+		a(href='/users/' + session.user._id + '/' + nextyyyy + '/' + nextmm)
+			button(type='button') NEXT
 		a(href='/signout')
 			button(type='button') SIGN OUT
 	div.calendar
-		div.month
-			ul
-				li.prev &#10094;
-				li.next &#10095;
-				li August
-				br
-				span 2017
-
-		ul.weekdays
-			li Su
-			li Mo
-			li Tu
-			li We
-			li Th
-			li Fr
-			li Sa
-
-		ul.days
-			- for (var i = 0; i < obj.weekDayFirstDay; i++) {
-				li
+		table
+			tr
+				th Su
+				th Mo
+				th Tu
+				th We
+				th Th
+				th Fr
+				th Sa
+			- var i;
+			tr
+				- for (i = 0; i < obj.weekDayFirstDay; i++) {
+					td
+				- }
+				- for (i = 1; i <= 7 - obj.weekDayFirstDay; i++) {
+					td= i
+						br
+						each event in evt
+							- var currentDay = new Date(obj.yyyy, obj.mm, i);
+							- if (currentDay >= event.begin.setHours(0, 0, 0, 0) && currentDay <= event.end.setHours(0, 0, 0, 0)) {
+								a(href=event.url)
+									span= event.description
+									br
+							- }
+				- }
+			- var aux = 0;
+			- while (i <= obj.numberOfDays) {
+				- if (aux === 0) {
+					tr
+				- }
+				td= i
+					br
+					each event in evt
+						- var currentDay = new Date(obj.yyyy, obj.mm, i);
+						- if (currentDay >= event.begin.setHours(0, 0, 0, 0) && currentDay <= event.end.setHours(0, 0, 0, 0)) {
+							a(href=event.url)
+								span= event.description
+								br
+						- }
+				- i++; aux++;
+				- if (aux === 7) {
+					- aux = 0;
+				- }
 			- }
-			- for (var i = 1; i <= obj.numberOfDays; i++) {
-				li= i
+			- while (aux > 0 && aux < 7) {
+				td
+				- aux++;
 			- }
